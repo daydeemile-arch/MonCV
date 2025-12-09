@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr"> <!-- langue = français -->
+<head>
+    <meta charset="UTF-8"> <!-- pour ne pas avoir d'erreur sur les caractères -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- pour l'affichage sur mobile -->
+    <title>CV - Émile DAYDÉ</title> <!-- Titre de l’onglet sur le navigateur -->
+    <link rel="stylesheet" href="style.css"> <!-- Lien avec fichier css -->
+</head>
+
+<body>
+
+    <!-- en-tete du site  -->
+    <header>
+        <div class="header-container"> <!-- regroupe le texte avec la photo -->
+            <img src="images/photo.jpg" alt="Photo de profil" class="profile-pic"> <!-- photo de profil -->
+            <div class="header-text"> <!-- nom et présentation -->
+                <h1>Émile DAYDÉ</h1>
+                <p>Étudiant à CESI en bachelor développeur informatique, touché par l'informatique depuis la plus tendre enfance.</p>
+            </div>
+        </div>
+        <nav> <!-- barre de navigation du site -->
+            <ul>
+                <!-- chaque lien permet de naviguer vers une section du CV -->
+                <li><a href="#formation">Formation</a></li>
+                <li><a href="#experiences">Expériences</a></li>
+                <li><a href="#competences">Compétences</a></li>
+                <li><a href="#album">Album Photo</a></li>
+                <li><a href="#calendrier">Calendrier</a></li>
+                <li><a href="#liens">Liens & Iframe</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+
+    <!-- section présentant les études dans un tableau -->
+    <section id="formation" class="hidden">
+        <h2>Formation</h2>
+        <table>
+            <tr>
+                <!-- titre des colonnes du tableau -->
+                <th>Année</th>
+                <th>Diplôme</th>
+                <th>Établissement</th>
+            </tr>
+            <tr>
+                <!-- donnée dans le tableua -->
+                <td>2022 - 2025</td>
+                <td>Baccalauréat Général</td>
+                <td>Lycée Louis Armand</td>
+            </tr>
+        </table>
+    </section>
+
+
+
+    <!-- liste simple pour présenter les expériences -->
+    <section id="experiences" class ="hidden">
+        <h2>Expériences Professionnelles</h2>
+        <ul>
+            <li>
+                <strong>2024 - Actuellement :</strong> Primeur chez <em>Lagrange Primeur</em><br>
+                Mise en place du stand au marché et relation client.
+            </li>
+        </ul>
+    </section>
+
+
+
+    <!-- liste pour les compétences -->
+    <section id="competences" class ="hidden">
+        <h2>Compétences</h2>
+        <ul>
+            <li><strong>Langages :</strong> Python, C, HTML, CSS, JavaScript, SQL</li>
+            <li><strong>Soft skills :</strong> Travail en équipe, rigueur, créativité, meneur d'équipe</li>
+        </ul>
+    </section>
+
+
+
+    <!-- album photos de voyage -->
+    <section id="album" class ="hidden">
+        <h2>Album Photo</h2>
+        <div class="gallery"> <!-- Conteneur pour la grille de photos -->
+            <!-- Chaque image correspond à une photo de voyage -->
+            <img src="images/voyage1.jpg" alt="Voyage 1">
+            <img src="images/voyage2.jpg" alt="Voyage 2">
+            <img src="images/voyage3.jpg" alt="Voyage 3">
+            <img src="images/voyage4.jpg" alt="Voyage 4">
+            <img src="images/voyage5.jpg" alt="Voyage 5">
+            <img src="images/voyage6.jpg" alt="Voyage 6">
+            <img src="images/voyage7.jpg" alt="Voyage 7">
+            <img src="images/voyage8.jpg" alt="Voyage 8">
+            <img src="images/voyage9.jpg" alt="Voyage 9">
+            <img src="images/voyage10.jpg" alt="Voyage 10">
+            <img src="images/voyage11.jpg" alt="Voyage 11">
+            <img src="images/voyage12.jpg" alt="Voyage 12">
+            <img src="images/voyage13.jpg" alt="Voyage 13">
+            <img src="images/voyage14.jpg" alt="Voyage 14">
+        </div>
+    </section>
+
+
+
+    <!-- calendrier avec dates importantes -->
+    <section id="calendrier" class ="hidden">
+        <h2>Calendrier de novembre 2025</h2>
+        <table class="calendar">
+            <tr>
+                <!-- colonnes pour les différents jour de la semaine -->
+                <th>Lun</th><th>Mar</th><th>Mer</th><th>Jeu</th><th>Ven</th><th>Sam</th><th>Dim</th>
+            </tr>
+            <!-- Chaque ligne représente une semaine -->
+            <tr>
+                <td></td><td></td><td></td><td></td><td>1</td><td>2</td><td>3<br><small>Anniversaire</small></td>
+            </tr>
+            <tr>
+                <td>4</td><td>5<br><small>Livrable 1</small></td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td>
+            </tr>
+            <tr>
+                <td>11</td><td>12<br><small>Permis</small></td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td>
+            </tr>
+            <tr>
+                <td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td>
+            </tr>
+            <tr>
+                <td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td><small>Noël</small></td>
+            </tr>
+        </table>
+    </section>
+
+
+
+    <!-- liens= externe et iframe -->
+    <section id="liens" class ="hidden">
+        <h2>Liens & Iframe</h2>
+        <p>
+            <a href="https://github.com/daydeemile-arch" target="_blank">Mon profil GitHub</a> <!-- lien ouvrant mon GitHub dans un nouvel onglet -->
+        </p>
+        <iframe src="https://fr.wikipedia.org/wiki/Limsa_d%27Aulnay" width="100%" height="400"></iframe> <!-- Iframe intégrant une page Wikipédia -->
+    </section>
+
+    <!-- formulaire de contact -->
+    <section id="contact" class ="hidden">
+        <h2>Contact</h2>
+        <form id="contact-form" action="https://formspree.io/f/mzzknnee" method="POST">
+            <label for="nom">Nom et prénom :</label>
+            <input type="text" id="nom" name="nom" required>
+
+            <label for="email">Adresse e-mail :</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="telephone">Numéro de téléphone :</label>
+            <input type="tel" id="telephone" name="telephone">
+
+            <label for="message">Message :</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit">Envoyer</button>
+        </form>
+
+        <p id="form-status"></p> <!-- Message de confiramtion d'envoie du formulaire -->
+    </section>
+
+
+
+    <!-- Pied de page avec un texte de copyright mais je vous autorise à me copier parce que je sais que c'est le meilleur site du monde -->
+    <footer>
+        <p>© 2025 Émile DAYDÉ — Tous droits réservés</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
