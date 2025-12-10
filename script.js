@@ -63,3 +63,37 @@ form.addEventListener("submit", async (event) => {
         status.textContent = "Erreur réseau — impossible d’envoyer le message.";
     }
 });
+
+// Sélection des éléments
+const toggleBtn = document.getElementById("theme-toggle");
+const icon = document.getElementById("theme-icon");
+
+// ---- Gestion du clic sur le bouton ----
+toggleBtn.addEventListener("click", () => {
+
+    // On active/désactive le mode clair
+    document.body.classList.toggle("light");
+
+    // Si on est en mode clair
+    if (document.body.classList.contains("light")) {
+        icon.textContent = "☀️";               // icône du mode clair
+        localStorage.setItem("theme", "light"); // on sauvegarde
+    }
+    // Sinon, on repasse en mode sombre
+    else {
+        icon.textContent = "🌙";               // icône du mode sombre
+        localStorage.setItem("theme", "dark");
+    }
+});
+
+// ---- Sauvegarde du thème au rechargement ----
+const savedTheme = localStorage.getItem("theme");
+
+if (savedTheme === "light") {
+    document.body.classList.add("light");
+    icon.textContent = "☀️";   // icône du mode clair
+}
+else {
+    document.body.classList.remove("light");
+    icon.textContent = "🌙";   // icône du mode sombre
+}
