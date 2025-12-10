@@ -1,99 +1,104 @@
-console.log("Le script est bien connecté !"); // Vérifie si le script est bien connecté
-let images = document.querySelectorAll("img") // On selectionne toutes les images
+console.log("Le script est bien connecté !");
+
+// -------------------
+// GESTION DE L'ALBUM PHOTO EN PLEIN ÉCRAN
+// -------------------
+let images = document.querySelectorAll("img");
 images.forEach(element => {
-    element.addEventListener("click", function() { // à chaque fois qu'une image est clické, on la met en plein écran
-        this.requestFullscreen()
-        this.addEventListener("click", function() { // si l'image est reclické, on enlève le plein écran
-            document.exitFullscreen()
-        })
-    })
+    element.addEventListener("click", function() {
+        if (this.requestFullscreen) {
+            this.requestFullscreen();
+        }
+
+        // Sortie du plein écran au second clic
+        this.addEventListener("click", function() {
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+            }
+        }, { once: true }); // L'événement se déclenche une seule fois pour éviter des doublons
+    });
 });
 
-// Sélection de toutes les sections à animer
+// -------------------
+// ANIMATION DES SECTIONS AU SCROLL
+// -------------------
 let sections = document.querySelectorAll(".hidden");
 
-// Fonction qui vérifie quelles sections sont visibles
 function checkSections() {
     sections.forEach(section => {
-        let position = section.getBoundingClientRect().top; // position de la section par rapport au haut de l'écran
-        let windowHeight = window.innerHeight; // hauteur de la fenêtre visible
+        let position = section.getBoundingClientRect().top;
+        let windowHeight = window.innerHeight;
 
-        if (position < windowHeight - 100) { // si la section est à moins de 100px du bas de la fenêtre on active l'animation
+        if (position < windowHeight - 100) {
             section.classList.add("visible");
         } else {
-            section.classList.remove("visible"); // sinon on laisse comme d'habitude
+            section.classList.remove("visible");
         }
     });
 }
 
-// Exécuter la fonction au scroll
 window.addEventListener("scroll", checkSections);
+checkSections(); // Au chargement initial
 
-// Exécuter aussi au chargement initial (pour animer les sections déjà visibles)
-checkSections();
-
-// Sélection du formulaire et du message de statut
+// -------------------
+// FORMULAIRE DE CONTACT (uniquement si présent)
+// -------------------
 const form = document.getElementById("contact-form");
 const status = document.getElementById("form-status");
 
-// Écouteur d'événement sur la soumission du formulaire
-form.addEventListener("submit", async (event) => {
-    event.preventDefault(); // empêche le rechargement automatique de la page
+if (form && status) {
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
 
-    // Création d'un objet FormData contenant les données du formulaire
-    const formData = new FormData(form);
+        try {
+            const response = await fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
 
-    try {
-        // Envoi des données vers Formspree avec fetch()
-        const response = await fetch(form.action, {
-            method: form.method,
-            body: formData,
-            headers: {
-                'Accept': 'application/json'
+            if (response.ok) {
+                status.textContent = "Merci ! Votre message a bien été envoyé.";
+                form.reset();
+            } else {
+                status.textContent = "Une erreur est survenue, veuillez réessayer.";
             }
-        });
-
-        if (response.ok) {
-            status.textContent = "Merci ! Votre message a bien été envoyé.";
-            form.reset(); // vide le formulaire
-        } else {
-            status.textContent = "Une erreur est survenue, veuillez réessayer.";
+        } catch (error) {
+            status.textContent = "Erreur réseau — impossible d’envoyer le message.";
         }
-    } catch (error) {
-        status.textContent = "Erreur réseau — impossible d’envoyer le message.";
-    }
-});
+    });
+}
 
-// Sélection des éléments
+// -------------------
+// BOUTON CHANGEMENT DE THÈME (sombre / clair)
+// -------------------
 const toggleBtn = document.getElementById("theme-toggle");
 const icon = document.getElementById("theme-icon");
 
-// ---- Gestion du clic sur le bouton ----
-toggleBtn.addEventListener("click", () => {
+if (toggleBtn && icon) {
+    // Gestion du clic
+    toggleBtn.addEventListener("click", () => {
+        document.body.classList.toggle("light");
 
-    // On active/désactive le mode clair
-    document.body.classList.toggle("light");
+        if (document.body.classList.contains("light")) {
+            icon.textContent = "☀️";
+            localStorage.setItem("theme", "light");
+        } else {
+            icon.textContent = "🌙";
+            localStorage.setItem("theme", "dark");
+        }
+    });
 
-    // Si on est en mode clair
-    if (document.body.classList.contains("light")) {
-        icon.textContent = "☀️";               // icône du mode clair
-        localStorage.setItem("theme", "light"); // on sauvegarde
+    // Application du thème sauvegardé au chargement
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "light") {
+        document.body.classList.add("light");
+        icon.textContent = "☀️";
+    } else {
+        document.body.classList.remove("light");
+        icon.textContent = "🌙";
     }
-    // Sinon, on repasse en mode sombre
-    else {
-        icon.textContent = "🌙";               // icône du mode sombre
-        localStorage.setItem("theme", "dark");
-    }
-});
-
-// ---- Sauvegarde du thème au rechargement ----
-const savedTheme = localStorage.getItem("theme");
-
-if (savedTheme === "light") {
-    document.body.classList.add("light");
-    icon.textContent = "☀️";   // icône du mode clair
-}
-else {
-    document.body.classList.remove("light");
-    icon.textContent = "🌙";   // icône du mode sombre
 }
